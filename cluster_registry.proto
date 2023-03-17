@@ -1,0 +1,102 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "github.com/open-beagle/awecloud-cluster-proto";
+package awecloud;
+
+// Interface exported by the server.
+service ClusterRegistry {
+  // Login 登录服务.
+  //
+  // 输入ID与Secret，匹配后返回集群链接信息与密钥.
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+
+  // Listen .
+  //
+  // 持续侦听，直至获取需要注册的服务.
+  rpc Listen(ListenRequest) returns (stream ListenResponse) {}
+
+  // PublishService .
+  //
+  // 客户端主动注册服务
+  rpc PublishService(PublishServiceRequest) returns (RegisterService) {}
+}
+
+// LoginRequest 集群信息
+message LoginRequest {
+  // ID, 客户端集群ID，aliyun
+  string ID = 1;
+
+  // Secret, 客户端集群的密钥, Bp#q3sM6uxK4
+  string Secret = 2;
+}
+
+// LoginResponse 集群信息
+message LoginResponse {
+  // Path, 集群的URL的访问路径, /awecloud/cluster/access
+  string Path = 1;
+
+  // Secret, 集群的密钥, Bp#q3sM6uxK4
+  string Secret = 2;
+}
+
+// ListenRequest ， 服务信息
+message ListenRequest {
+  // ID , 客户端集群ID ， aliyun
+  string ID = 1;
+}
+
+// ListenResponse ， 服务信息
+message ListenResponse {
+  // Type , 服务类型 ， 如service
+  string Type = 1;
+
+  // Service , 服务 ， 如k8s
+  string Service = 2;
+
+  // Action , 服务动作 ， 如create,update,delete
+  string Action = 3;
+
+  // Data , 服务数据 ， 如Json
+  string Data = 4;  
+}
+
+// PublishServiceRequest 发布服务信息请求
+message PublishServiceRequest {
+  // ID, 集群的ID，aliyun
+  string ID = 1;
+
+  // Service, 注册的服务信息
+  RegisterService Service = 2;
+}
+
+// RegisterService ， 服务信息
+message RegisterService {
+  // Name , 服务名称 ， 如k8s
+  string Name = 1;
+
+  // Type , 服务类型 ， 如tcp
+  string Type = 2;
+
+  // Host , 服务主机 ， 如kubernetes.default
+  string Host = 3;
+
+  // Port , 服务端口 ， 如6443
+  int32 Port = 4;
+
+  // Remote , 服务映射端口 ， 如7000
+  int32 Remote = 5;
+}

@@ -19,6 +19,6 @@ protoc \
 ## tag
 
 ```bash
-git tag v0.6.0 -f
-git push origin v0.6.0 -f
+git tag v0.6.1 -f
+git push origin v0.6.1 -f
 ```

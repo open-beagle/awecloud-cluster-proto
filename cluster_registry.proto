@@ -100,6 +100,6 @@ message RegisterService {
   // Remote , 服务映射端口 ， 如7000
   int32 Remote = 5;
 
-  // ApproveState, 集群状态 1 代接入  2 待同意  3 已同意 4 已拒绝
+  // ApproveState, 集群状态 1 待接入  2 待同意  3 已同意 4 已拒绝
   int32 ApproveState = 6;
 }

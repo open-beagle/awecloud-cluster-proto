@@ -51,6 +51,9 @@ message LoginResponse {
 
   // Secret, 集群的密钥, Bp#q3sM6uxK4
   string Secret = 2;
+
+  // ApproveState, 集群状态
+  int32 ApproveState = 3;
 }
 
 // ListenRequest ， 服务信息

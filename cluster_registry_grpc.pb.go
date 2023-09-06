@@ -46,7 +46,7 @@ func NewClusterRegistryClient(cc grpc.ClientConnInterface) ClusterRegistryClient
 
 func (c *clusterRegistryClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/awecloud.ClusterRegistry/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/awecloud/cluster/registry/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (c *clusterRegistryClient) Login(ctx context.Context, in *LoginRequest, opt
 }
 
 func (c *clusterRegistryClient) Listen(ctx context.Context, in *ListenRequest, opts ...grpc.CallOption) (ClusterRegistry_ListenClient, error) {
-	stream, err := c.cc.NewStream(ctx, &ClusterRegistry_ServiceDesc.Streams[0], "/awecloud.ClusterRegistry/Listen", opts...)
+	stream, err := c.cc.NewStream(ctx, &ClusterRegistry_ServiceDesc.Streams[0], "/awecloud/cluster/registry/Listen", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ func (x *clusterRegistryListenClient) Recv() (*ListenResponse, error) {
 
 func (c *clusterRegistryClient) PublishService(ctx context.Context, in *PublishServiceRequest, opts ...grpc.CallOption) (*RegisterService, error) {
 	out := new(RegisterService)
-	err := c.cc.Invoke(ctx, "/awecloud.ClusterRegistry/PublishService", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/awecloud/cluster/registry/PublishService", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func _ClusterRegistry_Login_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/awecloud.ClusterRegistry/Login",
+		FullMethod: "/awecloud/cluster/registry/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterRegistryServer).Login(ctx, req.(*LoginRequest))
@@ -188,7 +188,7 @@ func _ClusterRegistry_PublishService_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/awecloud.ClusterRegistry/PublishService",
+		FullMethod: "/awecloud/cluster/registry/PublishService",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterRegistryServer).PublishService(ctx, req.(*PublishServiceRequest))

@@ -200,7 +200,7 @@ func _ClusterRegistry_PublishService_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ClusterRegistry_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "awecloud.ClusterRegistry",
+	ServiceName: "awecloud/cluster/registry",
 	HandlerType: (*ClusterRegistryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
